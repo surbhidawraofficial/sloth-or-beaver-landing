@@ -123,7 +123,7 @@
     box-shadow:0 24px 50px rgba(43,43,43,0.15);
     aspect-ratio:4/5;
   }
-  .hero-img img{width:100%;height:100%;object-fit:cover;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 15%;}
 
   .awards{
     background:var(--cream);
@@ -240,11 +240,79 @@
     .hero .wrap{grid-template-columns:1fr;}
     .hero{padding:44px 0 56px;}
     .hero h1{font-size:34px;}
-    .hero-img{order:-1;aspect-ratio:16/10;}
+    .hero-img{order:-1;aspect-ratio:4/5;}
     .feature-grid{grid-template-columns:1fr;}
     .mentor .wrap{flex-direction:column;text-align:center;}
     .awards .wrap{gap:18px;}
   }
+
+  /* Exit-intent popup: hidden by default, never affects layout or the primary CTA path */
+  .exit-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(43,43,43,0.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+    padding:20px;
+  }
+  .exit-overlay.active{display:flex;}
+  .exit-modal{
+    background:var(--offwhite);
+    border-radius:14px;
+    max-width:420px;
+    width:100%;
+    padding:36px 32px;
+    position:relative;
+    text-align:center;
+    box-shadow:0 30px 60px rgba(43,43,43,0.3);
+  }
+  .exit-close{
+    position:absolute;
+    top:14px;right:16px;
+    background:none;border:none;
+    font-size:20px;
+    color:#8a8694;
+    cursor:pointer;
+    line-height:1;
+    padding:4px;
+  }
+  .exit-close:hover{color:var(--dark);}
+  .exit-modal h3{
+    font-family:'EB Garamond',serif;
+    font-weight:600;
+    font-size:24px;
+    color:var(--dark);
+    margin-bottom:10px;
+  }
+  .exit-modal p{
+    font-size:14.5px;
+    color:#5c5866;
+    margin-bottom:20px;
+  }
+  .exit-form{display:flex;flex-direction:column;gap:12px;}
+  .exit-form input[type="email"]{
+    padding:13px 16px;
+    border-radius:6.8px;
+    border:1px solid #ddd8cf;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    background:var(--white);
+  }
+  .exit-form input[type="email"]:focus{outline:2px solid var(--orange);outline-offset:1px;}
+  .exit-form .btn{width:100%;text-align:center;}
+  .exit-later{
+    display:inline-block;
+    margin-top:14px;
+    font-size:12.5px;
+    color:#8a8694;
+    text-decoration:underline;
+    cursor:pointer;
+    background:none;border:none;
+    font-family:'Poppins',sans-serif;
+  }
+  .exit-success{display:none;font-size:14.5px;color:var(--navy);font-weight:500;}
 </style>
 </head>
 <body>
@@ -330,6 +398,101 @@
     <p>Mentor &amp; Soul Growth Therapist empowering women globally to be calm, confident, healthy leaders of their lives.</p>
     <p style="margin-top:10px;">&copy; 2026 Karen Bashford &middot; <a class="footer-link" href="https://app.acuityscheduling.com/schedule/e0449dbc/appointment/22321690/calendar/699446?appointmentTypeIds%5B%5D=22321690" rel="noopener">Book a Free Call</a></p>
   </footer>
+
+  <!-- Exit-intent popup: only appears if a visitor is about to leave WITHOUT booking a call.
+       It never blocks, delays, or competes with the main "Book a Call" buttons above. -->
+  <div class="exit-overlay" id="exitOverlay" aria-hidden="true">
+    <div class="exit-modal" role="dialog" aria-modal="true" aria-labelledby="exitTitle">
+      <button class="exit-close" id="exitClose" aria-label="Close">&times;</button>
+      <div id="exitFormWrap">
+        <h3 id="exitTitle">Not Ready to Book Yet?</h3>
+        <p>Leave your email and Karen will send you free resources on breaking self-sabotage &mdash; no pressure, unsubscribe anytime.</p>
+        <form class="exit-form" id="exitForm">
+          <!-- TODO: point this form at your email platform's real embed action URL (Mailchimp / Klaviyo / ConvertKit) when ready.
+               Until then, submissions are only acknowledged in the browser and are NOT stored anywhere. -->
+          <input type="email" id="exitEmail" placeholder="Your email address" required>
+          <button type="submit" class="btn">Send Me Free Resources</button>
+        </form>
+        <button class="exit-later" id="exitLater">No thanks, just close this</button>
+      </div>
+      <p class="exit-success" id="exitSuccess">Thanks &mdash; you're on the list. Karen's team will be in touch soon.</p>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var overlay = document.getElementById('exitOverlay');
+  var closeBtn = document.getElementById('exitClose');
+  var laterBtn = document.getElementById('exitLater');
+  var form = document.getElementById('exitForm');
+  var formWrap = document.getElementById('exitFormWrap');
+  var success = document.getElementById('exitSuccess');
+  var ctaClicked = false;
+  var shown = false;
+  var armed = false;
+
+  // If a visitor clicks any real "Book a Call" button, never interrupt them with the popup.
+  document.querySelectorAll('a.btn').forEach(function(a){
+    a.addEventListener('click', function(){ ctaClicked = true; });
+  });
+
+  function alreadyShown(){
+    try { return sessionStorage.getItem('sob_exit_popup_shown') === '1'; }
+    catch(e){ return shown; }
+  }
+  function markShown(){
+    shown = true;
+    try { sessionStorage.setItem('sob_exit_popup_shown', '1'); } catch(e){}
+  }
+
+  function openPopup(){
+    if (ctaClicked || alreadyShown()) return;
+    markShown();
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+  function closePopup(){
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  closeBtn.addEventListener('click', closePopup);
+  laterBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closePopup(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closePopup(); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    // No email platform connected yet - this only shows a confirmation, nothing is stored or sent.
+    formWrap.style.display = 'none';
+    success.style.display = 'block';
+    setTimeout(closePopup, 2500);
+  });
+
+  // Arm listeners after a short delay so an accidental cursor jump on load can't trigger it.
+  setTimeout(function(){ armed = true; }, 4000);
+
+  // Desktop exit-intent: mouse leaves through the top of the viewport toward the tab bar.
+  document.addEventListener('mouseout', function(e){
+    if (!armed) return;
+    if (!e.relatedTarget && e.clientY <= 0) openPopup();
+  });
+
+  // Mobile/touch fallback: no reliable mouse-leave signal, so use an upward scroll
+  // after the visitor has already seen most of the page as a proxy for "heading back up to leave."
+  var maxScroll = 0;
+  var lastY = window.scrollY;
+  window.addEventListener('scroll', function(){
+    if (!armed) return;
+    var y = window.scrollY;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docH > 0 ? y / docH : 0;
+    if (pct > maxScroll) maxScroll = pct;
+    if (maxScroll > 0.55 && y < lastY - 40) openPopup();
+    lastY = y;
+  }, {passive:true});
+})();
+</script>
 
 </body>
 </html>
