@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Free Mentorship Call | Karen Bashford</title>
+<meta name="description" content="Book a free exploratory mentorship call with Karen Bashford, Empowerment Mentor & Soul Growth Therapist for women leaders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Pontano+Sans:wght@400;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#313055;
+    --dark:#2b2b2b;
+    --orange:#f9a86b;
+    --orange-dark:#ef8f49;
+    --cream:#f0ebe3;
+    --offwhite:#fbf9f6;
+    --white:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:var(--dark);
+    background:var(--white);
+    line-height:1.65;
+  }
+  h1,h2{
+    font-family:'EB Garamond',serif;
+    font-weight:600;
+    color:var(--dark);
+    line-height:1.2;
+  }
+  h1 em, h2 em{font-style:italic;font-weight:500;}
+  .label{
+    font-family:'Pontano Sans',sans-serif;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:13px;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  .announce{
+    background:var(--navy);
+    color:var(--white);
+    text-align:center;
+    padding:10px 16px;
+    font-size:13px;
+    font-family:'Pontano Sans',sans-serif;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+
+  header{
+    background:var(--white);
+    padding:22px 0;
+  }
+  header .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:'EB Garamond',serif;
+    font-weight:600;
+    font-size:24px;
+    color:var(--dark);
+    letter-spacing:0.5px;
+  }
+
+  .btn{
+    display:inline-block;
+    background:var(--orange);
+    color:var(--dark);
+    font-family:'Pontano Sans',sans-serif;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-size:14px;
+    font-weight:600;
+    padding:16px 34px;
+    border-radius:6.8px;
+    text-decoration:none;
+    box-shadow:0 6px 18px rgba(249,168,107,0.4);
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    border:none;
+    cursor:pointer;
+  }
+  .btn:hover{
+    background:var(--orange-dark);
+    transform:translateY(-2px);
+    box-shadow:0 10px 22px rgba(239,143,73,0.5);
+  }
+  .btn.small{padding:12px 24px;font-size:13px;}
+  .btn.dark{background:var(--navy);color:var(--white);box-shadow:0 8px 20px rgba(49,48,85,0.35);}
+  .btn.dark:hover{background:#26253f;}
+
+  .hero{
+    position:relative;
+    padding:80px 0 90px;
+    background:linear-gradient(180deg, var(--offwhite) 0%, var(--white) 100%);
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+    position:relative;
+    z-index:1;
+  }
+  .hero h1{font-size:46px;margin-bottom:20px;}
+  .hero p.sub{font-size:17px;color:#514f5c;margin-bottom:30px;max-width:480px;}
+  .trust{
+    margin-top:20px;
+    font-size:13px;
+    color:#8a8694;
+  }
+  .hero-img{
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 24px 50px rgba(43,43,43,0.15);
+    aspect-ratio:4/5;
+  }
+  .hero-img img{width:100%;height:100%;object-fit:cover;}
+
+  .awards{
+    background:var(--cream);
+    padding:28px 0;
+    text-align:center;
+  }
+  .awards .wrap{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:36px;
+  }
+  .awards .item{
+    font-family:'Pontano Sans',sans-serif;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    font-size:12.5px;
+    color:#5a5766;
+  }
+
+  .expect{
+    background:var(--white);
+    padding:70px 0;
+  }
+  .expect h2{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:44px;
+  }
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:32px;
+  }
+  .feature{
+    text-align:center;
+    padding:20px;
+  }
+  .feature .icon{
+    width:56px;height:56px;
+    border-radius:50%;
+    background:var(--cream);
+    border:2px solid var(--orange);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 16px;
+    font-size:22px;
+    color:var(--orange-dark);
+  }
+  .feature h3{font-family:'EB Garamond',serif;font-size:19px;margin-bottom:8px;font-weight:600;}
+  .feature p{font-size:14.5px;color:#5c5866;}
+
+  .mentor{
+    padding:70px 0;
+    background:var(--offwhite);
+  }
+  .mentor .wrap{
+    display:flex;
+    align-items:center;
+    gap:52px;
+  }
+  .mentor-img{
+    flex:0 0 220px;
+    width:220px;height:220px;
+    border-radius:50%;
+    overflow:hidden;
+    box-shadow:0 16px 32px rgba(43,43,43,0.18);
+  }
+  .mentor-img img{width:100%;height:100%;object-fit:cover;}
+  .mentor h2{font-size:28px;margin-bottom:14px;}
+  .mentor p{font-size:15.5px;color:#4a4756;margin-bottom:12px;}
+  .quote{
+    font-style:italic;
+    font-size:15px;
+    color:var(--navy);
+    border-left:3px solid var(--orange);
+    padding-left:14px;
+    margin-top:16px;
+  }
+  .quote span{display:block;font-style:normal;font-family:'Pontano Sans',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#8a8694;margin-top:6px;}
+
+  .final-cta{
+    background:var(--navy);
+    text-align:center;
+    padding:70px 24px;
+  }
+  .final-cta h2{
+    color:var(--white);
+    font-size:34px;
+    margin-bottom:14px;
+  }
+  .final-cta p{
+    color:#d3d1de;
+    font-size:16px;
+    margin-bottom:30px;
+    max-width:520px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  footer{
+    background:var(--dark);
+    color:#b7b5bd;
+    text-align:center;
+    padding:32px 24px;
+    font-size:13px;
+  }
+  footer .logo{color:var(--white);font-size:18px;margin-bottom:8px;font-family:'EB Garamond',serif;}
+  footer a.footer-link{
+    color:var(--orange);
+    text-decoration:underline;
+  }
+
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero{padding:44px 0 56px;}
+    .hero h1{font-size:34px;}
+    .hero-img{order:-1;aspect-ratio:16/10;}
+    .feature-grid{grid-template-columns:1fr;}
+    .mentor .wrap{flex-direction:column;text-align:center;}
+    .awards .wrap{gap:18px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="announce">Empowerment Mentor &amp; Soul Growth Therapist &middot; Women Business Owners &amp; Leaders</div>
+
+  <header>
+    <div class="wrap">
+      <div class="logo">KAREN BASHFORD</div>
+      <a class="btn small" href="https://app.acuityscheduling.com/schedule/e0449dbc/appointment/22321690/calendar/699446?appointmentTypeIds%5B%5D=22321690" rel="noopener">Book a Call</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Ditch the Self&#8209;Sabotage. <em>Become the Leader</em> of Your Life.</h1>
+        <p class="sub">Book a free exploratory call with Karen &mdash; a three-time award-winning Empowerment Mentor. Together we'll look at what's really holding you back, at the root, not just the symptoms.</p>
+        <a class="btn" href="https://app.acuityscheduling.com/schedule/e0449dbc/appointment/22321690/calendar/699446?appointmentTypeIds%5B%5D=22321690" rel="noopener">Book Your Free Call</a>
+        <div class="trust">No obligation &middot; 100% confidential &middot; Takes 30 seconds to book</div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.squarespace-cdn.com/content/v1/6613900ce958e36a4e4f4dbe/cae8e494-8db8-4435-99ae-b6016722d96c/Empowerment-mentor-Soul-Growth-Therapist-Karen-Bashford.jpg" alt="Karen Bashford, Empowerment Mentor">
+      </div>
+    </div>
+  </section>
+
+  <section class="awards">
+    <div class="wrap">
+      <div class="item">Influential Business Women 2024</div>
+      <div class="item">Best Empowerment Coach 2023</div>
+      <div class="item">Most Trusted Leadership Coach 2024, UK</div>
+    </div>
+  </section>
+
+  <section class="expect">
+    <div class="wrap">
+      <h2>What Happens on Your Free Call</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="icon">&#9737;</div>
+          <h3>We Talk It Through</h3>
+          <p>A relaxed, honest conversation about where you are now and what's really been holding you back.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">&#8734;</div>
+          <h3>Find the Root Cause</h3>
+          <p>Karen helps you connect the dots between old patterns and what's showing up in your life today.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">&#9825;</div>
+          <h3>Leave With Clarity</h3>
+          <p>You'll walk away with a clear next step &mdash; whether that's mentorship, or simply a lighter mind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mentor">
+    <div class="wrap">
+      <div class="mentor-img">
+        <img src="https://images.squarespace-cdn.com/content/v1/6613900ce958e36a4e4f4dbe/2afa7022-83d4-41b8-925f-6e6cb733e0a7/Womens-Empowerment-Coach-Mentor-Karen-Bashford.jpg" alt="Karen Bashford">
+      </div>
+      <div>
+        <h2>Hello, I'm Karen</h2>
+        <p>A three-time award-winning Empowerment Mentor and Soul Growth Therapist, I help women business owners, entrepreneurs, and leaders trade self-sabotage for calm, confident control of their own lives.</p>
+        <p>My work focuses on the inner child and the root causes beneath the surface &mdash; not just the symptoms.</p>
+        <div class="quote">"She is a true professional."<span>Tracy, London</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <h2>Now Is the Time.</h2>
+      <p>How much longer are you going to wait? Book your free exploratory call and take the first step toward being who you're meant to be.</p>
+      <a class="btn" href="https://app.acuityscheduling.com/schedule/e0449dbc/appointment/22321690/calendar/699446?appointmentTypeIds%5B%5D=22321690" rel="noopener">Yes, I'm Ready &mdash; Book My Call</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">Karen Bashford</div>
+    <p>Mentor &amp; Soul Growth Therapist empowering women globally to be calm, confident, healthy leaders of their lives.</p>
+    <p style="margin-top:10px;">&copy; 2026 Karen Bashford &middot; <a class="footer-link" href="https://app.acuityscheduling.com/schedule/e0449dbc/appointment/22321690/calendar/699446?appointmentTypeIds%5B%5D=22321690" rel="noopener">Book a Free Call</a></p>
+  </footer>
+
+</body>
+</html>
